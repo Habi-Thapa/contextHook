@@ -1,4 +1,13 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { User } from "../App";
 
 export const DashboardContext = createContext<User | undefined>(undefined);
+
+export function useUserContext() {
+  const user = useContext(DashboardContext);
+
+  if (user === undefined) {
+    throw new Error("useUserContext must be used with a Dashboard context");
+  }
+  return user;
+}
